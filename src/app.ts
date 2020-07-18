@@ -1,12 +1,12 @@
-import express from "express";
+import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import mongoose from "mongoose";
+import mongoose, { Connection } from "mongoose";
 
 import userRouter from "./routes/users";
 import noteRouter from "./routes/notes";
 
-const app: express.Application = express();
+const app: Application = express();
 const port: number = Number(process.env.port) || 5000;
 
 dotenv.config();
@@ -22,7 +22,7 @@ mongoose.connect(uri, {
   useUnifiedTopology: true,
 });
 
-const connection: mongoose.Connection = mongoose.connection;
+const connection: Connection = mongoose.connection;
 
 connection.once("open", () => {
   console.log("MongoDB connected");
@@ -31,7 +31,7 @@ connection.once("open", () => {
 app.use("/api/users", userRouter);
 app.use("/api/notes", noteRouter);
 
-app.get("/", (req: express.Request, res: express.Response) => {
+app.get("/", (_req: Request, res: Response) => {
   res.json("test");
 });
 

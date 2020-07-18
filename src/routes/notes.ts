@@ -1,17 +1,17 @@
-import express from "express";
+import express, { Router, Request, Response } from "express";
 import Note, { INote } from "../models/Note";
 import User, { IUser } from "../models/User";
 import { Document } from "mongoose";
 
-const router: express.Router = express.Router();
+const router: Router = express.Router();
 
-router.route("/").get((_req: express.Request, res: express.Response) => {
+router.route("/").get((_req: Request, res: Response) => {
   Note.find()
     .then((notes: INote[]) => res.json(notes))
     .catch((err: Error) => res.status(400).json(`Error: ${err}`));
 });
 
-router.route("/add").post((req: express.Request, res: express.Response) => {
+router.route("/add").post((req: Request, res: Response) => {
   const owner: INote["owner"] = req.body.owner;
   const title: INote["title"] = req.body.title;
   const text: INote["text"] = req.body.text;
@@ -35,7 +35,7 @@ router.route("/add").post((req: express.Request, res: express.Response) => {
     .catch((err: Error) => res.status(400).json(`Error: ${err}`));
 });
 
-router.route("/:uid").get((req: express.Request, res: express.Response) => {
+router.route("/:uid").get((req: Request, res: Response) => {
   const UserId: IUser["_id"] = req.params.uid;
 
   User.findById(UserId)
@@ -53,7 +53,7 @@ router.route("/:uid").get((req: express.Request, res: express.Response) => {
     .catch((err: Error) => res.status(400).json(`Error: ${err}`));
 });
 
-router.route("/:id").delete((req: express.Request, res: express.Response) => {
+router.route("/:id").delete((req: Request, res: Response) => {
   const noteId: INote["_id"] = req.params.id;
 
   Note.findByIdAndDelete(noteId)
@@ -61,7 +61,7 @@ router.route("/:id").delete((req: express.Request, res: express.Response) => {
     .catch((err: Error) => res.status(400).json(`Error: ${err}`));
 });
 
-router.route("/:id").patch((req: express.Request, res: express.Response) => {
+router.route("/:id").patch((req: Request, res: Response) => {
   Note.findById(req.params.id)
     .then((note: INote | null) => {
       if (note) {
