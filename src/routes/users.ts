@@ -1,6 +1,6 @@
 import express from "express";
+import { Document } from "mongoose";
 import User, { IUser } from "../models/User";
-import mongoose from "mongoose";
 
 const router: express.Router = express.Router();
 
@@ -21,7 +21,7 @@ router.route("/add").post((req: express.Request, res: express.Response) => {
   const password: IUser["password"] = req.body.password;
   const notes: IUser["notes"] = [];
 
-  const newUser = new User({ username, password, notes });
+  const newUser: Document = new User({ username, password, notes });
 
   newUser
     .save()
@@ -48,5 +48,11 @@ router
       })
       .catch((err: Error) => res.status(400).json(`Error: ${err}`));
   });
+
+router.route("/:id").delete((req: express.Request, res: express.Response) => {
+  User.findByIdAndDelete(req.params.id)
+    .then(() => res.json("User deleted"))
+    .catch((err: Error) => res.status(400).json(`Error: ${err}`));
+});
 
 export default router;
