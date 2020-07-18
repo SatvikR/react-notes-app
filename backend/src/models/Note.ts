@@ -1,13 +1,13 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 import { IUser } from "./User";
 
-export interface INote extends mongoose.Document {
+export interface INote extends Document {
   owner: IUser["_id"];
   title: string;
   text: string;
 }
 
-const noteSchema: mongoose.Schema = new mongoose.Schema(
+const noteSchema: Schema = new Schema(
   {
     owner: { type: mongoose.Types.ObjectId, ref: "User" },
     title: { type: String, required: true },
