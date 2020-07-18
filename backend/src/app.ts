@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 
 import userRouter from "./routes/users";
+import noteRouter from "./routes/notes";
 
 const app: express.Application = express();
 const port: number = Number(process.env.port) || 5000;
@@ -28,6 +29,7 @@ connection.once("open", () => {
 });
 
 app.use("/api/users", userRouter);
+app.use("/api/notes", noteRouter);
 
 app.get("/", (req: express.Request, res: express.Response) => {
   res.json("test");
