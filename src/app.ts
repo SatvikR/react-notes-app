@@ -1,4 +1,4 @@
-import express, { Application, Request, Response } from "express";
+import express, { Application } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose, { Connection } from "mongoose";
@@ -30,10 +30,6 @@ connection.once("open", () => {
 
 app.use("/api/users", userRouter);
 app.use("/api/notes", noteRouter);
-
-app.get("/", (_req: Request, res: Response) => {
-  res.json("test");
-});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
