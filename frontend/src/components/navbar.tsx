@@ -1,27 +1,37 @@
-import React from "react";
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import {} from "@material-ui/core";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  })
-);
+import React, { useState } from "react";
+import { Menu } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
-  const open: boolean = Boolean(anchorEl);
+  const [activeItem, setActiveItem] = useState<string>("home");
 
-  return <div></div>;
+  return (
+    <Menu pointing secondary color="blue" size="large">
+      <Menu.Item
+        as={Link}
+        to="/"
+        name="home"
+        active={activeItem === "home"}
+        onClick={() => setActiveItem("home")}
+      />
+      <Menu.Item
+        as={Link}
+        to="/notes"
+        name="your notes"
+        active={activeItem === "your notes"}
+        onClick={() => setActiveItem("your notes")}
+      />
+      <Menu.Menu position="right">
+        <Menu.Item
+          as={Link}
+          to="/login"
+          name="login"
+          active={activeItem === "login"}
+          onClick={() => setActiveItem("login")}
+        />
+      </Menu.Menu>
+    </Menu>
+  );
 };
 
 export default Navbar;
