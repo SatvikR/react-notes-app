@@ -16,6 +16,14 @@ router.route("/find/:id").get((req: Request, res: Response) => {
     .catch((err: Error) => res.status(400).json(`Error: ${err}`));
 });
 
+router
+  .route("/login/:username&:password")
+  .get((req: Request, res: Response) => {
+    User.find({ username: req.params.username, password: req.params.password })
+      .then((users: IUser[]) => res.json(users))
+      .catch((err: Error) => res.status(400).json(`Error: ${err}`));
+  });
+
 router.route("/add").post((req: Request, res: Response) => {
   const username: IUser["username"] = req.body.username;
   const password: IUser["password"] = req.body.password;
