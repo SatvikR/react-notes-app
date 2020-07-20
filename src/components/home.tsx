@@ -20,7 +20,9 @@ const Home: React.FC = () => {
             <List.Header as="a" href="https://www.mongodb.com/" target="_blank">
               MongoDB
             </List.Header>
-            <List.Description>Hosted on MongoDB Cloud Atlas</List.Description>
+            <List.Description>
+              Database Hosted on MongoDB Atlas
+            </List.Description>
           </List.Content>
         </List.Item>
         <List.Item>
