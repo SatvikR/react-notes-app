@@ -5,7 +5,6 @@ import "semantic-ui-css/semantic.min.css";
 import Login from "./components/login";
 import Navbar from "./components/navbar";
 import Home from "./components/home";
-import CreateNote from "./components/create-note";
 import EditNote from "./components/edit-note";
 import Notes from "./components/notes";
 import Signup from "./components/signup";
@@ -15,7 +14,6 @@ const App: React.FC = () => {
     <Router>
       <Navbar />
       <Route path="/" exact component={Home} />
-      <Route path="/create-note" exact component={CreateNote} />
       <Route path="/edit-note/:id" exact component={EditNote} />
       <Route path="/notes" exact component={Notes} />
       <Route path="/signup" exact component={Signup} />
