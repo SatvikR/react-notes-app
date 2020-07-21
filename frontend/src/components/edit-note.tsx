@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, ChangeEvent } from "react";
 import {
   Container,
   Form,
@@ -9,9 +9,45 @@ import {
 } from "semantic-ui-react";
 import TextareaAutosize from "react-textarea-autosize";
 import api from "../API/api";
+import { RouteComponentProps } from "react-router-dom";
+import { AxiosResponse } from "axios";
 
-const EditNote: React.FC = (props) => {
-  useEffect(() => {});
+interface IRouterProps {
+  id: string;
+}
+
+const EditNote: React.FC<RouteComponentProps<IRouterProps>> = (props) => {
+  const [title, setTitle] = useState<string>("");
+  const [text, setText] = useState<string>("");
+
+  const id = props.match.params.id;
+
+  useEffect(() => {
+    api.get("/api/notes/find/" + id).then((res: AxiosResponse) => {
+      setTitle(res.data.title);
+      setText(res.data.text);
+    });
+  }, []);
+
+  const handleSave = () => {
+    api.patch("/api/notes/" + id, {
+      title: title,
+      text: text,
+    });
+  };
+
+  const handleBack = () => {
+    handleSave();
+    window.location.pathname = "/notes";
+  };
+
+  const handleTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+  const handleText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setText(e.target.value);
+  };
 
   return (
     <Container>
@@ -22,25 +58,47 @@ const EditNote: React.FC = (props) => {
         <Popup
           content="Save"
           trigger={
-            <Button floated="right" icon basic color="green">
+            <Button
+              floated="right"
+              icon
+              basic
+              color="green"
+              onClick={handleSave}
+            >
               <Icon name="save" />
             </Button>
           }
         />
         <Popup
-          content="Back to Notes"
+          content="Save and Exit"
           trigger={
-            <Button floated="right" icon basic color="blue">
+            <Button
+              floated="right"
+              icon
+              basic
+              color="blue"
+              onClick={handleBack}
+            >
               <Icon name="arrow alternate circle left outline" />
             </Button>
           }
         />
         <Form.Field>
           <label>Title:</label>
-          <input placeholder="Title goes here" />
+          <input
+            placeholder="Title goes here"
+            value={title}
+            onChange={handleTitle}
+          />
         </Form.Field>
         <Form.Field>
-          <TextareaAutosize autoFocus minRows={20} />
+          <TextareaAutosize
+            autoFocus
+            minRows={20}
+            value={text}
+            onChange={handleText}
+            style={{ fontSize: 16 }}
+          />
         </Form.Field>
       </Form>
     </Container>
