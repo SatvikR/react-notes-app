@@ -7,6 +7,7 @@ import {
   Segment,
   Button,
   Message,
+  Loader,
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import api from "../API/api";
@@ -35,7 +36,6 @@ const Login: React.FC = () => {
         if (res.data.length === 0) {
           setFailedLogin(true);
         } else {
-          localStorage.setItem("logged_in", "true");
           localStorage.setItem("uid", res.data[0]._id);
           window.location.pathname = "/notes";
         }
@@ -45,11 +45,10 @@ const Login: React.FC = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("uid");
-    localStorage.removeItem("logged_in");
     window.location.pathname = "/";
   };
 
-  if (localStorage.getItem("logged_in")) {
+  if (localStorage.getItem("uid")) {
     return (
       <Grid
         textAlign="center"
@@ -58,7 +57,8 @@ const Login: React.FC = () => {
       >
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as="h2" textAlign="center">
-            You are currently logged in as {currUser}
+            You are currently logged in as{" "}
+            {currUser || <Loader active inline />}
           </Header>
           <Header as="h2" textAlign="center">
             <Icon name="log out" /> Log-out of your account
