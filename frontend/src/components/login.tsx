@@ -19,7 +19,7 @@ const Login: React.FC = () => {
   const [currUser, setCurrUser] = useState<string>("");
 
   useEffect(() => {
-    if (localStorage.getItem("uid") !== "") {
+    if (localStorage.getItem("uid")) {
       api
         .get(`/api/users/find/${localStorage.getItem("uid")}`)
         .then((res: AxiosResponse) => setCurrUser(res.data.username))
