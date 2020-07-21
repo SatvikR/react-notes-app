@@ -66,7 +66,6 @@ const Note: React.FC<IProps> = ({ title, _id }) => {
 };
 
 const Notes: React.FC = () => {
-  const note_id: string = "";
   const [notes, setNotes] = useState<Array<any> | null>(null);
 
   useEffect(() => {
@@ -92,6 +91,18 @@ const Notes: React.FC = () => {
       });
   };
 
+  const handleCreate = () => {
+    api
+      .post("/api/notes/add", {
+        owner: localStorage.getItem("uid"),
+        title: "Untitled",
+        text: "",
+      })
+      .then((res: AxiosResponse) => {
+        window.location.pathname = "/edit-note/" + res.data.id;
+      });
+  };
+
   return (
     <Container>
       <Header size="large" floated="left">
@@ -103,8 +114,7 @@ const Notes: React.FC = () => {
         icon
         basic
         color="green"
-        as={Link}
-        to={"/edit-note" + note_id}
+        onClick={handleCreate}
       >
         <Icon name="add" />
       </Button>
