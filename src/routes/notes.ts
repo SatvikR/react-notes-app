@@ -56,6 +56,20 @@ router.route("/:uid").get((req: Request, res: Response) => {
 router.route("/:id").delete((req: Request, res: Response) => {
   const noteId: INote["_id"] = req.params.id;
 
+  Note.findById(noteId).then((note: INote | null) => {
+    if (note) {
+      const ownerId: INote["owner"] = note.owner;
+      User.findById(ownerId).then((user: IUser | null) => {
+        if (user) {
+          user.notes.splice(user.notes.indexOf(note._id));
+        }
+        user
+          ?.save()
+          .catch((err: Error) => res.status(400).json(`Error: ${err}`));
+      });
+    }
+  });
+
   Note.findByIdAndDelete(noteId)
     .then(() => res.json("Note deleted"))
     .catch((err: Error) => res.status(400).json(`Error: ${err}`));
