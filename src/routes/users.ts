@@ -33,7 +33,7 @@ router.route("/add").post((req: Request, res: Response) => {
 
   newUser
     .save()
-    .then(() => res.json("User created"))
+    .then(() => res.json({ id: newUser._id }))
     .catch((err: Error) => res.status(400).json(`Error: ${err}`));
 });
 
