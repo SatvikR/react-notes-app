@@ -26,7 +26,7 @@ const EditNote: React.FC<RouteComponentProps<IRouterProps>> = (props) => {
     api.get("/api/notes/find/" + id).then((res: AxiosResponse) => {
       setTitle(res.data.title);
       setText(res.data.text);
-    });
+    }); // eslint-disable-next-line
   }, []);
 
   const handleSave = () => {
@@ -37,7 +37,10 @@ const EditNote: React.FC<RouteComponentProps<IRouterProps>> = (props) => {
   };
 
   const handleBack = () => {
-    handleSave();
+    api.patch("/api/notes/" + id, {
+      title: title,
+      text: text,
+    });
     window.location.pathname = "/notes";
   };
 
