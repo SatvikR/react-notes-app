@@ -30,7 +30,7 @@ router.route("/add").post((req: Request, res: Response) => {
             .catch((err: Error) => console.log(`Error ${err}`));
         }
       });
-      res.json("Note Created");
+      res.json({ uid: newNote._id });
     })
     .catch((err: Error) => res.status(400).json(`Error: ${err}`));
 });
