@@ -11,6 +11,14 @@ router.route("/").get((_req: Request, res: Response) => {
     .catch((err: Error) => res.status(400).json(`Error: ${err}`));
 });
 
+router.route("/find/:id").get((req: Request, res: Response) => {
+  Note.findById(req.params.id)
+    .then((note: INote | null) => {
+      res.json(note);
+    })
+    .catch((err: Error) => res.status(400).json(`Error: ${err}`));
+});
+
 router.route("/add").post((req: Request, res: Response) => {
   const owner: INote["owner"] = req.body.owner;
   const title: INote["title"] = req.body.title;
