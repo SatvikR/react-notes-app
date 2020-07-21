@@ -66,6 +66,7 @@ const Note: React.FC<IProps> = ({ title, _id }) => {
 };
 
 const Notes: React.FC = () => {
+  const note_id: string = "";
   const [notes, setNotes] = useState<Array<any> | null>(null);
 
   useEffect(() => {
@@ -103,7 +104,7 @@ const Notes: React.FC = () => {
         basic
         color="green"
         as={Link}
-        to="/create-note"
+        to={"/edit-note" + note_id}
       >
         <Icon name="add" />
       </Button>
