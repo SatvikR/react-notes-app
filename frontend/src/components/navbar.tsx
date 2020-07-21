@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
         <Menu.Item
           as={Link}
           to="/login"
-          name="login"
+          name={localStorage.getItem("uid") ? "logout" : "login"}
           active={activeItem === "login"}
           onClick={() => setActiveItem("login")}
         />

@@ -36,8 +36,8 @@ const EditNote: React.FC<RouteComponentProps<IRouterProps>> = (props) => {
     });
   };
 
-  const handleBack = () => {
-    api.patch("/api/notes/" + id, {
+  const handleBack = async () => {
+    await api.patch("/api/notes/" + id, {
       title: title,
       text: text,
     });

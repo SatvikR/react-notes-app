@@ -8,7 +8,6 @@ import {
   Button,
   Message,
 } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 import api from "../API/api";
 import { AxiosResponse } from "axios";
 
@@ -23,9 +22,17 @@ const Signup: React.FC = () => {
     setpswdMatch(password === repeat);
   }, [password, repeat]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (pswdMatch) {
-      console.log("sdfjdsklf");
+      api
+        .post("/api/users/add", {
+          username: username,
+          password: password,
+        })
+        .then((res: AxiosResponse) => {
+          localStorage.setItem("uid", res.data.id);
+          window.location.pathname = "/notes";
+        });
     }
   };
 
