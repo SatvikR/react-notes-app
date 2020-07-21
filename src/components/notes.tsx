@@ -9,6 +9,7 @@ import {
   Segment,
   Icon,
   Button,
+  Popup,
 } from "semantic-ui-react";
 import api from "../API/api";
 import { AxiosResponse } from "axios";
@@ -38,26 +39,36 @@ const Note: React.FC<IProps> = ({ title, _id }) => {
         </Grid.Column>
         <Grid.Column width={6}>
           <Segment textAlign="center">
-            <Button
-              icon
-              size="big"
-              as={Link}
-              to={"/edit-note/" + _id}
-              basic
-              color="blue"
-            >
-              <Icon name="edit outline" />
-            </Button>
+            <Popup
+              content="Edit"
+              trigger={
+                <Button
+                  icon
+                  size="big"
+                  as={Link}
+                  to={"/edit-note/" + _id}
+                  basic
+                  color="blue"
+                >
+                  <Icon name="edit outline" />
+                </Button>
+              }
+            />
             {"     "}
-            <Button
-              icon
-              size="big"
-              basic
-              color="red"
-              onClick={() => deleteMethod(_id)}
-            >
-              <Icon name="trash alternate outline" />
-            </Button>
+            <Popup
+              content="Delete"
+              trigger={
+                <Button
+                  icon
+                  size="big"
+                  basic
+                  color="red"
+                  onClick={() => deleteMethod(_id)}
+                >
+                  <Icon name="trash alternate outline" />
+                </Button>
+              }
+            />
           </Segment>
         </Grid.Column>
       </Grid.Row>
@@ -108,16 +119,21 @@ const Notes: React.FC = () => {
       <Header size="large" floated="left">
         Notes:
       </Header>
-      <Button
-        floated="right"
-        size="medium"
-        icon
-        basic
-        color="green"
-        onClick={handleCreate}
-      >
-        <Icon name="add" />
-      </Button>
+      <Popup
+        content="Create New"
+        trigger={
+          <Button
+            floated="right"
+            size="medium"
+            icon
+            basic
+            color="green"
+            onClick={handleCreate}
+          >
+            <Icon name="add" />
+          </Button>
+        }
+      />
       <div>
         {notes || (
           <Segment>
