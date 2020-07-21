@@ -18,9 +18,10 @@ import { Link } from "react-router-dom";
 interface IProps {
   title: string;
   _id: string;
+  date: string;
 }
 
-const Note: React.FC<IProps> = ({ title, _id }) => {
+const Note: React.FC<IProps> = ({ title, _id, date }) => {
   const deleteMethod = (_id: IProps["_id"]) => {
     api.delete(`/api/notes/${_id}`).catch((err: Error) => console.log(err));
   };
@@ -35,6 +36,7 @@ const Note: React.FC<IProps> = ({ title, _id }) => {
             <Header as="h2">
               <Icon name="file outline" /> {title}
             </Header>
+            <p>Last Updated on: {date}</p>
           </div>
         </Grid.Column>
         <Grid.Column width={6}>
@@ -95,9 +97,21 @@ const Notes: React.FC = () => {
         currNotes = res.data;
         currNotes.reverse();
         setNotes(
-          currNotes.map((note: { title: string; _id: string }) => {
-            return <Note title={note.title} _id={note._id} />;
-          })
+          currNotes.map(
+            (note: { title: string; _id: string; updatedAt: string }) => {
+              return (
+                <Note
+                  title={note.title}
+                  _id={note._id}
+                  date={
+                    new Date(note.updatedAt).toLocaleDateString() +
+                    ", " +
+                    new Date(note.updatedAt).toLocaleTimeString()
+                  }
+                />
+              );
+            }
+          )
         );
       });
   };
