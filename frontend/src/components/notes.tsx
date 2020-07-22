@@ -40,38 +40,40 @@ const Note: React.FC<IProps> = ({ title, _id, date }) => {
           </div>
         </Grid.Column>
         <Grid.Column width={6}>
-          <Segment textAlign="center">
-            <Popup
-              content="Edit"
-              trigger={
-                <Button
-                  icon
-                  size="big"
-                  as={Link}
-                  to={"/edit-note/" + _id}
-                  basic
-                  color="blue"
-                >
-                  <Icon name="edit outline" />
-                </Button>
-              }
-            />
-            {"     "}
-            <Popup
-              content="Delete"
-              trigger={
-                <Button
-                  icon
-                  size="big"
-                  basic
-                  color="red"
-                  onClick={() => deleteMethod(_id)}
-                >
-                  <Icon name="trash alternate outline" />
-                </Button>
-              }
-            />
-          </Segment>
+          <div style={{ marginTop: "4%" }}>
+            <Segment textAlign="center">
+              <Popup
+                content="Edit"
+                trigger={
+                  <Button
+                    icon
+                    size="big"
+                    as={Link}
+                    to={"/edit-note/" + _id}
+                    basic
+                    color="blue"
+                  >
+                    <Icon name="edit outline" />
+                  </Button>
+                }
+              />
+              {"     "}
+              <Popup
+                content="Delete"
+                trigger={
+                  <Button
+                    icon
+                    size="big"
+                    basic
+                    color="red"
+                    onClick={() => deleteMethod(_id)}
+                  >
+                    <Icon name="trash alternate outline" />
+                  </Button>
+                }
+              />
+            </Segment>
+          </div>
         </Grid.Column>
       </Grid.Row>
     </Grid>
