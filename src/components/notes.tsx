@@ -132,7 +132,8 @@ const Notes: React.FC = () => {
                   date={
                     new Date(note.updatedAt).toLocaleDateString() +
                     ", " +
-                    time.slice(0, time.length - 3)
+                    time.slice(0, time.length - 6) +
+                    time.slice(time.length - 3, time.length)
                   }
                 />
               );
