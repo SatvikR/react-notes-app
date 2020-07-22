@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/1d63a2c1-ddc2-4cbf-8770-d0d036c626af/deploy-status)](https://app.netlify.com/sites/objective-edison-e1831c/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1d63a2c1-ddc2-4cbf-8770-d0d036c626af/deploy-status)](https://app.netlify.com/sites/typescript-notes-app/deploys)
 
 This app is made with MongoDB, Express, React, and Node.js, more specifically typescript
 
