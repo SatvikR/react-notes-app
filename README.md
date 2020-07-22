@@ -35,3 +35,5 @@ cd ..
 yarn install
 yarn run dev
 ```
+
+Do the steps above with npm if you don't have yarn
