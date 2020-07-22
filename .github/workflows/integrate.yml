@@ -1,0 +1,14 @@
+name: Auto subtree
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  create-subtree:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: git subtree push --prefix backend origin backend
+      - run: git subtree push --prefix frontend origin frontend
