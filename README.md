@@ -10,7 +10,7 @@ To visit the app go to https://notes.satvikreddy.com
 
 ## Cloud Services / CDNs Used for this project
 
-- [MongoDB Cloud Atlas](https://www.mongodb.com/) to host a MongoDB cluster
+- [MongoDB Cloud Atlas](https://www.mongodb.com/cloud/atlas) to host a MongoDB cluster
 - [AWS EC2](https://aws.amazon.com/ec2/) to host the express server
 - [Netlify](https://www.netlify.com/) to serve static files (frontend)
 
